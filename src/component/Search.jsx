@@ -14,6 +14,7 @@ const InputContainer = styled.label`
   @media (min-width: 767px) {
     margin-bottom: 0;
     width: 280px;
+    
   }
 `;
 const Input = styled.input.attrs({
@@ -23,7 +24,7 @@ const Input = styled.input.attrs({
   margin-left: 2rem;
   border: none;
   outline: none;
-  background-color: var(--colors-bg);
+  background-color: var(--colors-ui-base);
   color: var(--color-text);
 `;
 
