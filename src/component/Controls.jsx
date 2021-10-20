@@ -1,5 +1,5 @@
 import {Search} from "./Search";
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {CustomSelect} from "./CustomSelect";
 import styled from 'styled-components'
 
