@@ -5,25 +5,28 @@ import {Main} from './component/Main'
 import {Controls} from "./component/Controls";
 import {useEffect, useState} from "react";
 import {ALL_COUNTRIES} from "./config";
+import {List} from "./component/List";
+import {Switch, Route} from "react-router-dom";
+import {HomePage} from "./page/HomePage";
+import {Details} from "./page/Details";
+import {NotFound} from "./page/NotFound";
 
 function App() {
-    const [countries,setCountries] = useState([])
-    useEffect(()=> {
-        axios.get(ALL_COUNTRIES)
-            .then(
-            ({data}) => setCountries(data)
-        )
-    },[])
-    console.log(countries)
+
     return (
-        <div className="App">
-            <>
-                <Header/>
-                <Main>
-                    <Controls/>
-                </Main>
-            </>
-        </div>
+        <>
+            <Header/>
+            <Main>
+                <Switch>
+                    <Route exact patch={'/'}>
+                        <HomePage/>
+                    </Route>
+                    <Route path={'/country/:name'} component={<Details/>}/>
+                    <Route component={<NotFound/>}/>
+                </Switch>
+            </Main>
+        </>
+
     );
 }
 
