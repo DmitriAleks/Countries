@@ -7,7 +7,7 @@ const options = [
     {value: 'Africa', label: 'Africa'},
     {value: 'America', label: 'America'},
     {value: 'Asia', label: 'Asia'},
-    {value: 'Europa', label: 'Europa'},
+    {value: 'Europe', label: 'Europe'},
     {value: 'Oceania', label: 'Oceania'},
 ];
 

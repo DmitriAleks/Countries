@@ -8,20 +8,9 @@ import {Controls} from "../component/Controls";
 
 
 export const HomePage = ({countries, setCountries}) => {
-
+    const [filterCountries, setFilterCountries] = useState(countries)
     const {push} = useHistory()
-    const [filterCountries, setFilterCountries] = useState([countries])
-    const handlerSearch = (search, region) => {
-        let data = [...countries];
-        if (region) {
-                data = data.filter(el => el.region.includes(region))
-        }
-        if(search) {
-            data = data.filter(el=> el.name.toLowerCase().includes(search.toLowerCase()))
-        }
-        setFilterCountries(data)
-    }
-
+    debugger
     useEffect(() => {
         if (!countries.length) {
             axios.get(ALL_COUNTRIES)
@@ -30,11 +19,26 @@ export const HomePage = ({countries, setCountries}) => {
         }
     }, [])
 
+    useEffect(() => {
+        handlerSearch()
+    }, [countries])
+
+    const handlerSearch = (search, region) => {
+        let data = [...countries];
+        if (region) {
+            data = data.filter(el => el.region.includes(region))
+        }
+        if (search) {
+            data = data.filter(el => el.name.toLowerCase().includes(search.toLowerCase()))
+        }
+        setFilterCountries(data)
+    }
+
     return (
         <>
             <Controls onSearch={handlerSearch}/>
             <List>
-                {countries.map((el) => {
+                {filterCountries.map((el) => {
                         const countyInfo = {
                             img: el.flags.png,
                             name: el.name,

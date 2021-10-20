@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import axios from "axios";
+import {useState, useEffect} from 'react'
+import {filterByCode} from "../config";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -37,20 +40,20 @@ const ListGroup = styled.div`
   }
 `;
 const List = styled.ul`
-list-style: none;
+  list-style: none;
   margin: 0;
   padding: 0;
-  
+
 `;
 const ListItem = styled.li`
-line-height: 1.8;
-  
+  line-height: 1.8;
+
   & > b {
     font-weight: var(--fw-bold);
   }
 `;
 const Meta = styled.div`
-margin-top:3rem;
+  margin-top: 3rem;
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
@@ -59,20 +62,20 @@ margin-top:3rem;
   & > b {
     font-weight: var(--fw-bold);
   }
-  
-  @media(min-width: 767px) {
+
+  @media (min-width: 767px) {
     flex-direction: row;
     align-items: center;
   }
-  
+
 `;
 const TagGroup = styled.div`
-display: flex;
+  display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 `;
 const Tag = styled.span`
-padding: 0 1rem;
+  padding: 0 1rem;
   background-color: var(--colors-ui-base);
   box-shadow: var(--shadow);
   line-height: 1.5;
@@ -95,6 +98,14 @@ export const Info = (props) => {
         borders = [],
         push,
     } = props
+    const [neighbors, setNeighbors] = useState([])
+    useEffect(() => {
+        if(borders.length){
+            axios.get(filterByCode(borders)).then(
+                ({data}) => setNeighbors(data.map(c => c.name)))
+        }
+    }, [borders])
+
     return (<div>
         <Wrapper>
             <InfoImage src={flag} alt={name}/>
@@ -126,7 +137,7 @@ export const Info = (props) => {
                             <b>Currency :</b> {currencies.map(c => (<span key={c.code}>{c.name} </span>))}
                         </ListItem>
                         <ListItem>
-                            <b>Languages :</b> {languages.map(l => (<span key={l}>{l.name}</span>))}
+                            <b>Languages:</b> {languages.map(l => (<span key={l}>{l.name}</span>))}
                         </ListItem>
                     </List>
                 </ListGroup>
@@ -136,7 +147,7 @@ export const Info = (props) => {
                         <span>There is no border countries</span>
                     ) : (
                         <TagGroup>
-                            {borders.map(b => (<Tag key={b}>{b}</Tag>))}
+                            {neighbors.map(b => (<Tag key={b} onClick={()=>push(`/country/${b}`)} >{b}</Tag>))}
                         </TagGroup>
                     )}
                 </Meta>

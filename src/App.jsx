@@ -6,7 +6,7 @@ import {HomePage} from "./page/HomePage";
 import {Details} from "./page/Details";
 import {NotFound} from "./page/NotFound";
 import {useState} from "react";
-//1-30
+
 function App() {
     const [countries, setCountries] = useState([])
 

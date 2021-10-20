@@ -10,16 +10,16 @@ import {Info} from "../component/Info";
 export const Details = ({match}) => {
     const {name} = useParams()
     const {push, goBack} = useHistory()
-    const [country,setCountry] = useState(null)
-    useEffect(()=>{
+    const [country, setCountry] = useState(null)
+    useEffect(() => {
         axios.get(searchByCountry(name)).then(
             ({data}) => setCountry(data[0])
         );
-    },[name])
+    }, [name])
     return (<div>
         <Button onClick={goBack}><IoArrowBack/>Back</Button>
         {country && (
-            <Info {...country}/>
+            <Info push={push} {...country}/>
         )}
 
     </div>)
