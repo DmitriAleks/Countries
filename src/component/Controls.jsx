@@ -1,5 +1,5 @@
 import {Search} from "./Search";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {CustomSelect} from "./CustomSelect";
 import styled from 'styled-components'
 
@@ -25,10 +25,15 @@ const Wrapper = styled.div`
 `
 
 
-export const Controls = () => {
+export const Controls = ({onSearch}) => {
     const [search, setSearch] = useState()
     const [region, setRegion] = useState()
-
+    useEffect(() => {
+        const regionValue = region?.value || '';
+        console.log(regionValue)
+        onSearch(search, regionValue)
+//eslint-disable-next-line
+    }, [search, region])
     return (<Wrapper>
         <Search search={search} setSearch={setSearch}/>
         <CustomSelect

@@ -3,8 +3,8 @@
 
 
 
-export const Details = () => {
+export const Details = ({match}) => {
     return ( <div>
-        Details
+        Details{match.params.name}
     </div>)
 }
