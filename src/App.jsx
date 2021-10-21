@@ -18,6 +18,9 @@ function App() {
                     <Route exact path='/'>
                         <HomePage countries={countries} setCountries={setCountries}/>
                     </Route>
+                    <Route exact path='/Countries'>
+                        <HomePage countries={countries} setCountries={setCountries}/>
+                    </Route>
                     <Route path='/country/:name' component={Details}/>
                     <Route component={NotFound}/>
                 </Switch>
