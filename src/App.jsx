@@ -15,9 +15,6 @@ function App() {
             <Header/>
             <Main>
                 <Switch>
-                    <Route exact path='/'>
-                        <HomePage countries={countries} setCountries={setCountries}/>
-                    </Route>
                     <Route exact path='/Countries'>
                         <HomePage countries={countries} setCountries={setCountries}/>
                     </Route>
